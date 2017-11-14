@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ApiService {
-    messages = [];
+    messages = []
+    users = []
+
     constructor ( private http: Http) {}
 
     getMessages() {
@@ -11,5 +13,16 @@ export class ApiService {
             this.messages = res.json();
             console.log(res);
         });
+    }
+
+    getUsers() {
+        this.http.get('http://localhost:3000/users').subscribe(res => {
+            this.users = res.json();
+            console.log(res);
+        });
+    }
+
+    getProfile(id) {
+        return this.http.get('http://localhost:3000/profile/' + id)
     }
 }
